@@ -1,19 +1,24 @@
 from tkinter import *
 from tkinter import ttk
 
-# TEMP
-from data import get_apps_info
-# END TEMP
-
 
 class Table:
-    def __init__(self, frame: Frame, columns: tuple):
-        self.columns = columns
+
+    columns = (
+        'Program name',
+        'Total time',
+        'Background time',
+        'Active window time',
+        'Last run'
+    )
+
+
+    def __init__(self, frame: Frame):
         self.table = ttk.Treeview(frame)
-        self.table['columns'] = columns
+        self.table['columns'] = self.columns
 
         self.table.column("#0", width=0,  stretch=NO)
-        for column in columns:
+        for column in self.columns:
             self.table.column(column, anchor=CENTER, width=calculate_width(column))
             self.table.heading(column, text=column, anchor=CENTER)
 
@@ -39,6 +44,7 @@ class Table:
         self.table.pack()
 
 def calculate_width(column_name: str) -> int:
+    # utility method to convert string len to width in pixels
     # 12pt ~= 16px
     return len(column_name) * 16
 
@@ -61,11 +67,6 @@ if __name__ == "__main__":
     )
 
     table = Table(frame, columns)
-
-    # TEMP
-    records = get_apps_info()
-    table.display_records(records)
-    # END TEMP
 
     table.pack()
 
