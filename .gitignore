@@ -1,0 +1,4 @@
+.vscode
+__pycache__/
+screen_time_tracker
+application_info.json
